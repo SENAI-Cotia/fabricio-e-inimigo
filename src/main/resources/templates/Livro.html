@@ -52,19 +52,29 @@
     </div>
 
     <div class="filtro">
+
+        <div class="genero">
         <h1>Gêneros</h1>
-        <form th:action="@{/home}" method="get">
-            <input type="text" name="nome" th:value="${param.nome}" placeholder="Pesquisar por nome...">
-            <select name="genero" onchange="this.value === 'todos' ? window.location.href='/home' : this.form.submit()">
-                <option value="todos" th:selected="${param.genero == null or param.genero.isEmpty()}">Todos os gêneros</option>
-                <option th:each="genero : ${generos}"
-                        th:value="${genero}"
-                        th:text="${genero}"
-                        th:selected="${#strings.equals(param.genero, genero)}">
-                </option>
-            </select>
-            <button type="submit">Buscar</button>
-        </form>
+            <form th:action="@{/home}" method="get">
+                <select name="genero" onchange="this.value === 'todos' ? window.location.href='/home' : this.form.submit()">
+                    <option value="todos" th:selected="${param.genero == null or param.genero.isEmpty()}">Todos os gêneros</option>
+                    <option th:each="genero : ${generos}"
+                            th:value="${genero}"
+                            th:text="${genero}"
+                            th:selected="${#strings.equals(param.genero, genero)}">
+                    </option>
+                </select>
+            </form>
+        </div>
+
+        <div class="livro">
+            <h1>Livro</h1>
+            <form th:action="@{/home}" method="get">
+                <input type="text" name="nome" th:value="${param.nome}" placeholder="Pesquisar por nome...">
+                <button type="submit" class="btn-buscar">Buscar</button>
+            </form>
+        </div>
+
     </div>
 
     <section>

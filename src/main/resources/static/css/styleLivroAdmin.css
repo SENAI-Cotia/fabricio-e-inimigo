@@ -155,7 +155,7 @@ section {
 .filtro{
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: space-between;
     margin-left: 15px;
 }
 
@@ -170,4 +170,40 @@ section {
     background-color: #5C1F0A;
     color: #F5D5B8;
     border: 0;
+}
+
+.genero{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.livro{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-right: 15px;
+}
+
+.livro input{
+    border-radius: 6px;
+    color: #1E0C04;
+    padding: 5px;
+    margin-right: 10px;
+    border: 1px solid #FFFAEA;
+}
+
+.livro input::placeholder{
+    color:#8A3E18;
+    padding-right: 8px;
+}
+
+.btn-buscar{
+    background-color: #8A3E18;
+    color: #FFD9B8;
+    border: 1px solid #8A3E18;
+    padding: 8px;
+    border-radius: 8px;
 }
