@@ -28,14 +28,19 @@ public class LivroController {
     private UserRepository userRepository;
 
     @GetMapping
-    public String getLivro(Model model, @RequestParam(value = "genero", required = false) String genero){
-        List<Livro> livros;
+    public String getLivro(Model model,
+                           @RequestParam(value = "genero", required = false) String genero,
+                           @RequestParam(value = "nome", required = false) String nome){
+        List<Livro> livros = livroRepository.findAll();
 
+        if(nome != null && !nome.isEmpty()){
+            livros = livroRepository.findByNomeContainingIgnoreCase(nome);
+        }
 
         if(genero != null && !genero.isEmpty() && !genero.equals("todos")){
-            livros = livroRepository.findByGenero(genero);
-        } else {
-            livros = livroRepository.findAll();
+            livros = livros.stream()
+                    .filter(l -> l.getGenero().equals(genero))
+                    .toList();
         }
 
         List<String> generos = livroRepository.findAll()
@@ -43,6 +48,7 @@ public class LivroController {
                 .map(Livro::getGenero)
                 .distinct()
                 .toList();
+
         model.addAttribute("livros", livros);
         model.addAttribute("generos", generos);
         model.addAttribute("livrosAlugados", userRepository.findAllLivrosAlugados());

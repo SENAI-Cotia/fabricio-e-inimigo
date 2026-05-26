@@ -16,5 +16,6 @@ public interface UserRepository extends JpaRepository<User, Long>{
         @Query("SELECT livros FROM User u JOIN u.livrosAlugados livros")
         List<Long> findAllLivrosAlugados();
         boolean existsByLivrosAlugadosContaining(Long idLivro);
+        List<User> findByEmailContainingIgnoreCase(String email);
 
 }

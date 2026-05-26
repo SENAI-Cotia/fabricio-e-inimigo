@@ -161,3 +161,28 @@ header{
     align-items: center;
     margin: 10px 10px 32px 10px;
 }
+
+.buscador{
+    margin: 0 0 10px 10px;
+}
+
+.buscador input{
+    border-radius: 6px;
+    color: #1E0C04;
+    padding: 5px;
+    margin-right: 10px;
+    border: 1px solid #FFFAEA;
+}
+
+.buscador input::placeholder{
+    color:#8A3E18;
+    padding-right: 8px;
+}
+
+.buscador select{
+   padding: 6px;
+    border-radius: 8px;
+    background-color: #5C1F0A;
+    color: #F5D5B8;
+    border: 0;
+}

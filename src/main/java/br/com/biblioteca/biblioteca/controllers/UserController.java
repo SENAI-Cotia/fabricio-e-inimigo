@@ -35,9 +35,23 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
 
     @GetMapping("/users")
-    public String getUser(Model model){
+    public String getUser(Model model,
+                          @RequestParam(value = "email", required = false) String email,
+                          @RequestParam(value = "status", required = false) String status){
         List<User> users = userRepository.findAll();
-        model.addAttribute("users",users);
+
+        if(email != null && !email.isEmpty()){
+            users = userRepository.findByEmailContainingIgnoreCase(email);
+        }
+
+        if(status != null && !status.isEmpty() && !status.equals("todos")){
+            users = users.stream()
+                    .filter(u -> u.getStatus().toString().equals(status))
+                    .toList();
+        }
+
+        model.addAttribute("users", users);
+        model.addAttribute("statuss", Status.values());
         return "index";
     }
 
@@ -175,6 +189,8 @@ public class UserController {
             }
         }
     }
+
+
 
 
 }

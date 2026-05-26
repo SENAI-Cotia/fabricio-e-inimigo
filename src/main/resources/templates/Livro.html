@@ -52,17 +52,29 @@
     </div>
 
     <div class="filtro">
+
+        <div class="genero">
         <h1>Gêneros</h1>
-        <form th:action="@{/home}" method="get">
-            <select name="genero" onchange="this.value === 'todos' ? window.location.href='/home' : this.form.submit()">
-                <option value="todos" th:selected="${param.genero == null or param.genero.isEmpty()}">Todos os gêneros</option>
-                <option th:each="genero : ${generos}"
-                        th:value="${genero}"
-                        th:text="${genero}"
-                        th:selected="${#strings.equals(param.genero, genero)}">
-                </option>
-            </select>
-        </form>
+            <form th:action="@{/home}" method="get">
+                <select name="genero" onchange="this.value === 'todos' ? window.location.href='/home' : this.form.submit()">
+                    <option value="todos" th:selected="${param.genero == null or param.genero.isEmpty()}">Todos os gêneros</option>
+                    <option th:each="genero : ${generos}"
+                            th:value="${genero}"
+                            th:text="${genero}"
+                            th:selected="${#strings.equals(param.genero, genero)}">
+                    </option>
+                </select>
+            </form>
+        </div>
+
+        <div class="livro">
+            <h1>Livro</h1>
+            <form th:action="@{/home}" method="get">
+                <input type="text" name="nome" th:value="${param.nome}" placeholder="Pesquisar por nome...">
+                <button type="submit" class="btn-buscar">Buscar</button>
+            </form>
+        </div>
+
     </div>
 
     <section>
@@ -74,10 +86,12 @@
                 <a class="btn-editar" th:href="@{/home/editarLivro/{id}(id=${livro.id})}" sec:authorize="hasRole('ADMIN')">Editar</a>
                 <a class="btn-excluir" th:href="@{/home/excluir/{id}(id=${livro.id})}" sec:authorize="hasRole('ADMIN')">Excluir</a>
                 <form th:action="@{/home/alugar/{id}(id=${livro.id})}" method="post" sec:authorize="hasRole('ALUNO')">
-                    <button type="submit" class="btn-excluir"
-                            th:disabled="${livrosAlugados.contains(livro.id)}"
-                            th:text="${livrosAlugados.contains(livro.id)} ? 'Indisponível' : 'Alugar'">
-                    </button>
+                    <div class="btn-alugar">
+                        <button type="submit"
+                                th:disabled="${livrosAlugados.contains(livro.id)}"
+                                th:text="${livrosAlugados.contains(livro.id)} ? 'Indisponível' : 'Alugar'">
+                        </button>
+                    </div>
                 </form>
                 </div>
         </div>
