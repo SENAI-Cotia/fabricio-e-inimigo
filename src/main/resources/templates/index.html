@@ -48,7 +48,10 @@
                     </div>
                 </div>
                 <p th:text="${user.email}" class="card-email"></p>
-                <p th:text="${user.idLivroAlugado != null ? user.idLivroAlugado : 'Nenhum livro alugado'} " class="card-idLivro"> </p>
+                <div class="card-idLivro">
+                    <span th:if="${livrosPorUsuario[user.id].isEmpty()}">Nenhum livro alugado</span>
+                    <span th:each="livro : ${livrosPorUsuario[user.id]}" th:text="${livro.nome} + ' || '"></span>
+                </div>
 
 
                 <div class="botoes">

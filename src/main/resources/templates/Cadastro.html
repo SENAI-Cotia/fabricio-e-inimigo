@@ -50,11 +50,13 @@
 
                 <div th:if="${user.id != null}">
 
-                    <div class="livros" th:if="${user.id != null}">
+                    <div class="livros">
                         <label>Livros alugados: </label>
                         <div class="tela-fundo">
                             <div th:each="livro : ${livrosAlugados}" class="info-livro">
                                 <span th:text="${livro.nome}"></span>
+                                <span th:if="${datasAluguel[livro.id] != null}"
+                                      th:text="'Devolver até: ' + ${#temporals.format(datasAluguel[livro.id].plusDays(7), 'dd/MM/yyyy')}"></span>
                                 <a th:href="@{/devolverLivro/{idUser}/{idLivro}(idUser=${user.id}, idLivro=${livro.id})}">Remover</a>
                             </div>
                         </div>
