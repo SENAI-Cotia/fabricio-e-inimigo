@@ -29,6 +29,10 @@
            th:if="${datasAluguel[livro.id] != null}"
            th:text="'Devolver até: ' + ${#temporals.format(datasAluguel[livro.id].plusDays(7), 'dd/MM/yyyy')}">
         </p>
+        <span th:if="${datasAluguel[livro.id] != null and #temporals.createNow().isAfter(datasAluguel[livro.id].plusDays(7))}"
+              style="color: red; font-weight: bold;">
+    Pendente
+</span>
     </div>
 </div>
 
