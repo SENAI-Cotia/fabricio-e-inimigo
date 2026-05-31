@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Usuários</title>
+    <link rel="icon" type="image/png" href="/images/BIBLIOTECH.png">
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -56,7 +57,10 @@
                     </div>
                 </div>
                 <p th:text="${user.email}" class="card-email"></p>
-                <p th:text="${user.idLivroAlugado != null ? user.idLivroAlugado : 'Nenhum livro alugado'} " class="card-idLivro"> </p>
+                <div class="card-idLivro">
+                    <span th:if="${livrosPorUsuario[user.id].isEmpty()}">Nenhum livro alugado</span>
+                    <span th:each="livro : ${livrosPorUsuario[user.id]}" th:text="${livro.nome} + ' || '"></span>
+                </div>
 
 
                 <div class="botoes">

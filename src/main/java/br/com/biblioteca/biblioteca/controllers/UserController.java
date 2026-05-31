@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -50,8 +51,15 @@ public class UserController {
                     .toList();
         }
 
+        Map<Long, List<Livro>> livrosPorUsuario = new HashMap<>();
+        for(User user : users){
+            List<Livro> livros = livroRepository.findAllById(user.getLivrosAlugados());
+            livrosPorUsuario.put(user.getId(), livros);
+        }
+
         model.addAttribute("users", users);
         model.addAttribute("statuss", Status.values());
+        model.addAttribute("livrosPorUsuario", livrosPorUsuario);
         return "index";
     }
 
@@ -80,6 +88,7 @@ public class UserController {
 
         model.addAttribute("user", user);
         model.addAttribute("livrosAlugados", livrosAlugados);
+        model.addAttribute("datasAluguel", user.getDatasAluguel());
         model.addAttribute("cargos", Cargo.values());
         model.addAttribute("statuss", Status.values());
         return "Cadastro";
