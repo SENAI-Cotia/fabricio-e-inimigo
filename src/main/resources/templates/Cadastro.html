@@ -46,7 +46,10 @@
 
                 <div class="login-senha">
                     <label>Senha: </label>
-                    <input type="text" name="senha" th:value="${user.id != null ? '' : ''}" placeholder=" Digite sua senha (deixe em branco para manter)" th:required="${user.id == null}">
+                    <input type="text" name="senha"
+                           th:value="${user.id != null ? '' : ''}"
+                           th:placeholder="${user.id != null ? ' Digite sua senha (deixe em branco para manter)' : ' Digite sua senha'}"
+                           th:required="${user.id == null}">
                 </div>
 
                 <div th:if="${user.id != null}">
